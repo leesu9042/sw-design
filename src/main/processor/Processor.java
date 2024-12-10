@@ -1,18 +1,23 @@
-package com.example.project.processor;
+package processor;
 
-import com.example.project.observer.Action;
+import Actuator.ConcreteAction;
+import com.example.project.action.Action;
+
+
+
+
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Processor {
-    protected List<Action> actions = new ArrayList<>();
+    protected List<com.example.project.action.Action> actions = new ArrayList<>();
 
     public void subscribe(Action action) {
         actions.add(action);
         System.out.println("Action subscribed.");
     }
 
-    public void unsubscribe(Action action) {
+    public void unsubscribe(ConcreteAction action) {
         actions.remove(action);
         System.out.println("Action unsubscribed.");
     }
@@ -23,5 +28,7 @@ public abstract class Processor {
         }
     }
 
+
+    //update 메소드
     public abstract void eventProcess(String event);  // 템플릿 메서드 (추상)
 }

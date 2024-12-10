@@ -1,4 +1,4 @@
-package com.example.project.observer;
+package Actuator;
 
 public class ConcreteAction implements Action {
     private String name;

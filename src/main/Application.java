@@ -1,13 +1,10 @@
-package com.example.project.main;
-
-import com.example.project.processor.ConcreteProcessor;
-import com.example.project.observer.ConcreteAction;
+import processor.ConcreteProcessor;
+import Actuator.ConcreteAction;
 
 public class Application {
     public static void main(String[] args) {
         ConcreteProcessor processor = new ConcreteProcessor();
 
-        예시
 
         // Observers 생성
         ConcreteAction action1 = new ConcreteAction("Action 1");
