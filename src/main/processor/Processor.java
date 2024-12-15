@@ -1,7 +1,7 @@
 package processor;
 
 import Actuator.ConcreteAction;
-import com.example.project.action.Action;
+import Actuator.Action;
 
 
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Processor {
-    protected List<com.example.project.action.Action> actions = new ArrayList<>();
+    protected List<Action> actions = new ArrayList<>();
 
     public void subscribe(Action action) {
         actions.add(action);

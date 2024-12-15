@@ -5,7 +5,6 @@ public class Application {
     public static void main(String[] args) {
         ConcreteProcessor processor = new ConcreteProcessor();
 
-
         // Observers 생성
         ConcreteAction action1 = new ConcreteAction("Action 1");
         ConcreteAction action2 = new ConcreteAction("Action 2");
