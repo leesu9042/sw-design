@@ -28,7 +28,6 @@ public abstract class Processor {
         }
     }
 
-
     //update 메소드
     public abstract void eventProcess(String event);  // 템플릿 메서드 (추상)
 }
