@@ -1,28 +1,39 @@
-import processor.concreteProcessor.ConcreteProcessor;
-import tmp.ConcreteAction;
+
+import Actuator.AlramAction;
+import Actuator.CallEmergency;
+import monitor.ConcreteMonitor;
+import monitor.Monitor;
+import processor.Processor;
+import processor.ProcessorObserver;
+import processor.concreteProcessor.TimeProcessor;
 
 public class Application {
     public static void main(String[] args) {
-        ConcreteProcessor processor = new ConcreteProcessor();
 
-        // Observers 생성
-        ConcreteAction action1 = new ConcreteAction("Action 1");
-        ConcreteAction action2 = new ConcreteAction("Action 2");
+        // 모니터 및 프로세서 초기화
+        ConcreteMonitor monitor = new ConcreteMonitor();
+        Monitor timeMonitor = monitor.new TimeMonitor();
 
-        // 구독자 등록
-        processor.subscribe(action1);
-        processor.subscribe(action2);
+        // 프로세서 초기화 및 옵저버 등록
+        TimeProcessor timeProcessor = new TimeProcessor();
+        timeMonitor.registerObserver( timeProcessor);
 
-        // 이벤트 처리
-        processor.eventProcess("Event A");
-        processor.eventProcess("Event B");
-
-        // 구독 해제
-        processor.unsubscribe(action1);
-
-        // 다시 이벤트 처리
-        processor.eventProcess("Event C");
+        // 액션 인스턴스 생성
+        CallEmergency action1 = new CallEmergency();
+        AlramAction action2 = new AlramAction();
 
 
+        // 액션 구독 등록
+        timeProcessor.subscribe(action1);
+
+
+        // 이벤트 감지 및 알림
+        timeMonitor.detectEvent("Time event A");
+
+        // 액션 구독 해제 및 재처리
+        timeProcessor.subscribe(action2);
+
+
+        timeMonitor.detectEvent("Time event B");
     }
 }

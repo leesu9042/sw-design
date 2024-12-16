@@ -6,24 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Monitor implements Subject {
-    private List<ProcessorObserver> observers = new ArrayList<>();
+    private List<ProcessorObserver> processorObservers = new ArrayList<>();
 
     @Override
     public void registerObserver(ProcessorObserver observer) {
-        observers.add(observer);
+        processorObservers.add(observer);
     }
 
     @Override
     public void removeObserver(ProcessorObserver observer) {
-        observers.remove(observer);
+        processorObservers.remove(observer);
     }
 
     @Override
-    public void notifyObserver(String event) {
-        for (ProcessorObserver observer : observers) {
-            observer.update(event);
+    public void notifyProcessorObserver(String event) {
+        for (ProcessorObserver processorObserver : processorObservers) {
+            processorObserver.update(event);
         }
     }
 
-    public abstract void detectEvent();
+    public abstract void detectEvent(String event);
 }

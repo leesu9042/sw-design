@@ -1,74 +1,51 @@
 package processor;
 
-import tmp.ConcreteAction;
-import tmp.Action;
-
-
-
-
+import Actuator.ActionObserver;
 import java.util.ArrayList;
 import java.util.List;
 
-
-// subject + template method
-
-public abstract class Processor implements ProcessorObserver  {
-    protected List<Action> actions = new ArrayList<>();
+// Subject + Template Method
+public abstract class Processor implements ProcessorObserver {
+    protected List<ActionObserver> actions = new ArrayList<>();
     protected String event;
 
-    // 초기화 메서드를 명시적으로 정의
-
-
-
-
-    public void subscribe(Action action) {
+    // 구독 등록
+    public void subscribe(ActionObserver action) {
         actions.add(action);
-        System.out.println("Action subscribed.");
+        System.out.println(action + "이(가) 구독되었습니다.");
     }
 
-    public void unsubscribe(ConcreteAction action) {
+    // 구독 해제
+    public void unsubscribe(ActionObserver action) {
         actions.remove(action);
-        System.out.println("Action unsubscribed.");
+        System.out.println(action + " - 액션이 구독 해제되었습니다.");
     }
 
+    // 이벤트 수신 메서드
+    public abstract void receivedEvent(String event);
 
-
-    protected void notifyObservers(String data) {
-        for (Action action : actions) {
-            action.update();
+    // 액션 알림
+    protected void notifyActionObservers(String event) {
+        for (ActionObserver action : actions) {
+            action.update(event);
         }
     }
 
-    // event 수신 메서드
-    protected void receivedData(String event) {
-        this.event = event;
-        System.out.println("Data received: " + event);
-    }
-
-
-
-
+    // 템플릿 메서드
     protected void templateMethod(String event) {
-        receivedData(event);
+        receivedEvent(event);
         eventProcess(event);
-        notifyObservers(event);
-
+        notifyActionObservers(event);
     }
 
-
-    public abstract void eventProcess(String event); { // 템플릿 메서드 (추상)
-        System.out.println("Event processed: " + event);
-    }
-
-
-
-    // 템플릿 메서드 호출
-    @Override
-    public void update(String event) {
+    public void update(String event){
         templateMethod(event);
     }
 
 
 
 
+
+    // 추상 메서드 - 서브클래스에서 구현 필요
+    public abstract void eventProcess(String event);
 }
