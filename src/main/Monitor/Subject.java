@@ -1,9 +1,9 @@
-package Monitor;
+package monitor;
 
-import processor.Observer;
+import processor.ProcessorObserver;
 
 public interface Subject {
-    void registerObserver(Observer observer);
-    void removeObserver(Observer observer);
+    void registerObserver(ProcessorObserver observer);
+    void removeObserver(ProcessorObserver observer);
     void notifyObserver(String event);
 }

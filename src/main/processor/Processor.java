@@ -1,7 +1,7 @@
 package processor;
 
-import Actuator.ConcreteAction;
-import Actuator.Action;
+import tmp.ConcreteAction;
+import tmp.Action;
 
 
 
@@ -9,8 +9,17 @@ import Actuator.Action;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Processor {
+
+// subject + template method
+
+public abstract class Processor implements ProcessorObserver  {
     protected List<Action> actions = new ArrayList<>();
+    protected String event;
+
+    // 초기화 메서드를 명시적으로 정의
+
+
+
 
     public void subscribe(Action action) {
         actions.add(action);
@@ -22,13 +31,44 @@ public abstract class Processor {
         System.out.println("Action unsubscribed.");
     }
 
-    protected void notifyObservers(String event) {
+
+
+    protected void notifyObservers(String data) {
         for (Action action : actions) {
-            action.update(event);
+            action.update();
         }
     }
 
+    // event 수신 메서드
+    protected void receivedData(String event) {
+        this.event = event;
+        System.out.println("Data received: " + event);
+    }
 
-    //update 메소드
-    public abstract void eventProcess(String event);  // 템플릿 메서드 (추상)
+
+
+
+    protected void templateMethod(String event) {
+        receivedData(event);
+        eventProcess(event);
+        notifyObservers(event);
+
+    }
+
+
+    public abstract void eventProcess(String event); { // 템플릿 메서드 (추상)
+        System.out.println("Event processed: " + event);
+    }
+
+
+
+    // 템플릿 메서드 호출
+    @Override
+    public void update(String event) {
+        templateMethod(event);
+    }
+
+
+
+
 }

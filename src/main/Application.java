@@ -1,5 +1,5 @@
-import processor.ConcreteProcessor;
-import Actuator.ConcreteAction;
+import processor.concreteProcessor.ConcreteProcessor;
+import tmp.ConcreteAction;
 
 public class Application {
     public static void main(String[] args) {

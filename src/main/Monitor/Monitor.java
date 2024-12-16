@@ -1,26 +1,26 @@
-package Monitor;
+package monitor;
 
-import processor.Observer;
+import processor.ProcessorObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Monitor implements Subject {
-    private List<Observer> observers = new ArrayList<>();
+    private List<ProcessorObserver> observers = new ArrayList<>();
 
     @Override
-    public void registerObserver(Observer observer) {
+    public void registerObserver(ProcessorObserver observer) {
         observers.add(observer);
     }
 
     @Override
-    public void removeObserver(Observer observer) {
+    public void removeObserver(ProcessorObserver observer) {
         observers.remove(observer);
     }
 
     @Override
     public void notifyObserver(String event) {
-        for (Observer observer : observers) {
+        for (ProcessorObserver observer : observers) {
             observer.update(event);
         }
     }

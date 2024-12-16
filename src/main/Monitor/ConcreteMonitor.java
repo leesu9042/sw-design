@@ -1,4 +1,6 @@
-package Monitor;
+package monitor;
+
+import monitor.Monitor;
 
 public class ConcreteMonitor {
     // 시간 모니터
